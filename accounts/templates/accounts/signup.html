@@ -1,33 +1,25 @@
-{% load static %}
-{% bootstrap_css %}
-{% bootstrap_javascript jquery='full' %}
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-      <meta charset="utf-8" />
-      <title>Account Create</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>  
-  <body>
-    <form method="POST" action="{% url 'signup' %}">
-      {% csrf_token %}
-      <label>ユーザーID</label>
-      {{ form.username }}
-      {{ form.username.errors }}
-      <label>表示名</label>
-      {{ form.displayname }}
-      {{ form.displayname.errors }}
-      <label>Eメールアドレス</label>
-      {{ form.email }}
-      {{ form.email.errors }}
-      <label>パスワード</label>
-      {{ form.password1 }}
-      {{ form.password1.errors }}
-      <label>パスワード(確認)</label>
-      {{ form.password2 }}
-      {{ form.password2.errors }}
-      <button type = "submit">登録</button>
-    </form>
-  </body>
-</html>
+{% block title %}signup{% endblock %}
+
+{% block content %}
+<form method="POST" action="{% url 'signup' %}">
+	{% csrf_token %}
+	<label>ユーザーID</label>
+	{{ form.username }}
+	{{ form.username.errors }}
+	<label>表示名</label>
+	{{ form.displayname }}
+	{{ form.displayname.errors }}
+	<label>Eメールアドレス</label>
+	{{ form.email }}
+	{{ form.email.errors }}
+	<label>パスワード</label>
+	{{ form.password1 }}
+	{{ form.password1.errors }}
+	<label>パスワード(確認)</label>
+	{{ form.password2 }}
+	{{ form.password2.errors }}
+	<button type="submit">登録</button>
+</form>
+{% endblock %}
