@@ -3,23 +3,43 @@
 {% block title %}signup{% endblock %}
 
 {% block content %}
+
+<h2>Sign up your Account</h2>
+<hr>
+
 <form method="POST" action="{% url 'signup' %}">
 	{% csrf_token %}
-	<label>ユーザーID</label>
-	{{ form.username }}
+	<div class="form-group">
+		<label for="user_id">ユーザID</label>
+		<input type="text" class="form-control" id="user_id" placeholder="your user ID" name="username">
+	</div>
+	<!-- How to use this ?? -->
 	{{ form.username.errors }}
-	<label>表示名</label>
-	{{ form.displayname }}
+
+	<div class="form-group">
+		<label for="displayname">表示名</label>
+		<input type="text" class="form-control" id="displayname" placeholder="your username" name="displayname">
+	</div>
 	{{ form.displayname.errors }}
-	<label>Eメールアドレス</label>
-	{{ form.email }}
+
+	<div class="form-group">
+		<label for="email">Email address</label>
+		<input type="email" class="form-control" id="email" placeholder="xxxx@example.com" name="email">
+	</div>
 	{{ form.email.errors }}
-	<label>パスワード</label>
-	{{ form.password1 }}
+
+	<div class="form-group">
+		<label for="password1">パスワード</label>
+		<input type="password" class="form-control" id="password1" placeholder="password" name="password1">
+	</div>
 	{{ form.password1.errors }}
-	<label>パスワード(確認)</label>
-	{{ form.password2 }}
+
+	<div class="form-group">
+		<label for="password2">パスワード(確認)</label>
+		<input type="password" class="form-control" id="password2" placeholder="Confirm password" name="password2">
+	</div>
 	{{ form.password2.errors }}
-	<button type="submit">登録</button>
+
+	<button type="submit" class="btn btn-outline-success">Sign up</button>
 </form>
 {% endblock %}
