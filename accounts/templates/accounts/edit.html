@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Account Edit{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Edit your Account</h2>
+    <hr>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="user_id">ユーザID</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                </div>
+                <input type="text" class="form-control" id="user_id" name="username" readonly>
+            </div>
+        </div>
+        <!-- How to use this ?? -->
+        {{ form.username.errors }}
+
+        <div class="form-group">
+            <label for="displayname">表示名</label>
+            <input type="text" class="form-control" id="displayname" placeholder="your username" name="displayname">
+        </div>
+        {{ form.displayname.errors }}
+
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="xxxx@example.com" name="email">
+        </div>
+        {{ form.email.errors }}
+
+        <div class="form-group">
+            <label for="password1">パスワード</label>
+            <input type="password" class="form-control" id="password1" placeholder="password" name="password1">
+        </div>
+        {{ form.password1.errors }}
+
+        <div class="form-group">
+            <label for="password2">パスワード(確認)</label>
+            <input type="password" class="form-control" id="password2" placeholder="Confirm password" name="password2">
+        </div>
+        {{ form.password2.errors }}
+
+        <button type="submit" class="btn btn-outline-success">Sign up</button>
+    </form>
+</div>
+{% endblock %}
