@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Account Detail{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<h2>Your Profile</h2>
+	<hr>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>ユーザID</th>
+				<td>@{{ user.username }}</td>
+			</tr>
+			<tr>
+				<th>username</th>
+				<td>{{ user.displayname }}</td>
+			</tr>
+			<tr>
+				<th>Email Address</th>
+				<td>{{ user.email }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="{% url 'edit' user.username %}">
+		<button type="button" class="btn btn-outline-secondary">Edit your Profile</button>
+	</a>
+
+</div>
+{% endblock %}

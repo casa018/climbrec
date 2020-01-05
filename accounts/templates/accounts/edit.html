@@ -45,7 +45,12 @@
         </div>
         {{ form.password2.errors }}
 
-        <button type="submit" class="btn btn-outline-success">Sign up</button>
+        <button type="submit" class="btn btn-outline-success">Update</button>
+        <a href="{% url 'detail' user.username %}">
+            <button type="button" class="btn btn-outline-secondary">Back to profile</button>
+        </a>
+
     </form>
+
 </div>
 {% endblock %}
