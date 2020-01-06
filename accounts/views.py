@@ -1,11 +1,11 @@
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordChangeDoneView
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from django.shortcuts import redirect, resolve_url
-from .forms import LoginForm, SignupForm, EditForm
+from .forms import LoginForm, SignupForm, EditForm, UserPasswordChangeForm
 
 
 User = get_user_model()
@@ -49,4 +49,14 @@ class AccountEdit(OnlyYouMixin, UpdateView):
     slug_url_kwarg = 'username'
 
     def get_success_url(self):
-        return resolve_url('accounts:detail', pk=self.kwargs['username'])
+        return resolve_url('detail', username=self.kwargs['username'])
+
+
+class AccountPasswordChangeView(PasswordChangeView):
+    form_class = UserPasswordChangeForm
+    template_name = 'accounts/passwordchange.html'
+    success_url = reverse_lazy('passwordchangedone')
+
+
+class AccountPasswordChangeDoneView(PasswordChangeDoneView):
+    template_name = 'accounts/passwordchangedone.html'

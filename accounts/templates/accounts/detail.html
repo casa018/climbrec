@@ -21,10 +21,17 @@
 				<th>Email Address</th>
 				<td>{{ user.email }}</td>
 			</tr>
+			<tr>
+				<th>Profile</th>
+				<td>{{ user.profile }}</td>
+			</tr>
 		</tbody>
 	</table>
 	<a href="{% url 'edit' user.username %}">
 		<button type="button" class="btn btn-outline-secondary">Edit your Profile</button>
+	</a>
+	<a href="{% url 'passwordchange' %}">
+		<button type="button" class="btn btn-outline-secondary">Change Password</button>
 	</a>
 
 </div>
