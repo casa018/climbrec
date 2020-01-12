@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Account Delete{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Account Delete</h2>
+    <hr>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <p>Delete Your Account ?</p>
+        <button type="submit" class="btn btn-outline-danger">Yes, Delete Account</button>
+        <a href="{% url 'detail' user.username %}">
+            <button type="button" class="btn btn-outline-secondary">Cancel</button>
+        </a>
+    </form>
+</div>
+{% endblock %}

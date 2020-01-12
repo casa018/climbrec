@@ -1,5 +1,5 @@
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordChangeDoneView
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.shortcuts import render
@@ -60,3 +60,11 @@ class AccountPasswordChangeView(PasswordChangeView):
 
 class AccountPasswordChangeDoneView(PasswordChangeDoneView):
     template_name = 'accounts/passwordchangedone.html'
+
+
+class AccountDeleteView(OnlyYouMixin, DeleteView):
+    template_name = 'accounts/delete.html'
+    success_url = reverse_lazy("login")
+    model = User
+    slug_field = 'username'
+    slug_url_kwarg = 'username'

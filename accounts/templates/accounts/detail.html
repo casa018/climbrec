@@ -33,6 +33,10 @@
 	<a href="{% url 'passwordchange' %}">
 		<button type="button" class="btn btn-outline-secondary">Change Password</button>
 	</a>
+	<a href="{% url 'delete' user.username %}">
+		<button type="button" class="btn btn-outline-danger">Delete Account</button>
+	</a>
+
 
 </div>
 {% endblock %}
