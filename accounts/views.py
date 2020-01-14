@@ -1,11 +1,13 @@
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordChangeDoneView
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import (TemplateView, CreateView, DetailView, UpdateView, DeleteView,
+                                  PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from django.shortcuts import redirect, resolve_url
-from .forms import LoginForm, SignupForm, EditForm, UserPasswordChangeForm
+from .forms import (LoginForm, SignupForm, EditForm, UserPasswordChangeForm,
+                    AccountPasswordResetForm, AccountSetPasswordForm)
 
 
 User = get_user_model()
@@ -13,13 +15,13 @@ User = get_user_model()
 
 class AccountLoginView(LoginView):
     form_class = LoginForm
-    template_name = "accounts/login.html"
+    template_name = 'accounts/login.html'
 
 
 class AccountCreateView(CreateView):
     form_class = SignupForm
-    template_name = "accounts/signup.html"
-    success_url = reverse_lazy("login")
+    template_name = 'accounts/signup.html'
+    success_url = reverse_lazy('login')
 
 
 class AccountIndexView(TemplateView):
@@ -64,7 +66,29 @@ class AccountPasswordChangeDoneView(PasswordChangeDoneView):
 
 class AccountDeleteView(OnlyYouMixin, DeleteView):
     template_name = 'accounts/delete.html'
-    success_url = reverse_lazy("login")
+    success_url = reverse_lazy('login')
     model = User
     slug_field = 'username'
     slug_url_kwarg = 'username'
+
+
+class AccountPasswordResetView(PasswordResetView):
+    template_name = 'accounts/passwordreset.html'
+    success_url = reverse_lazy('passwordresetdone')
+    form_class = AccountPasswordResetForm
+    subject_template_name = 'account/mail_template/passwordreset/subject.txt'
+    email_template_name = 'account/mail_template/passwordreset/message.txt'
+
+
+class AccountPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'accounts/passwordresetdone.html'
+
+
+class AccountPasswordConfirmView(PasswordResetConfirmView):
+    form_class = AccountSetPasswordForm
+    template_name = 'accounts/passwordresetconfirm.html'
+    success_url = reverse_lazy('passwordrestcomplete')
+
+
+class AccountPassrowdResetCompleteView(PasswordResetCompleteView):
+    templete_name = 'accounts/passwordresetcomplete.html'
